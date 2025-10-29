@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbon Calculator | Eco-Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">🌿 Eco-Hub</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="calculator.html" class="active">Calculator</a>
+      <a href="shop.html">Shop</a>
+      <a href="challenges.html">Challenges</a>
+      
+    </nav>
+  </header>
+
+  <!-- Calculator Section -->
+  <section class="section">
+    <h1>Carbon Footprint Calculator</h1>
+    <p>Find out how your lifestyle impacts the environment.</p>
+
+    <form id="calculatorForm" class="form-box">
+      <label>Monthly Electricity Usage (kWh)</label>
+      <input type="number" id="electricity" placeholder="e.g. 300">
+
+      <label>Monthly Gas Usage (Kg)</label>
+      <input type="number" id="gas" placeholder="e.g. 50">
+      
+      <label>Monthly Car Mileage (Km)</label>
+      <input type="number" id="carMileage" placeholder="e.g. 500">
+
+      <label>Yearly Flight Hours</label>
+      <input type="number" id="flights" placeholder="e.g. 10">
+
+      <label>Diet Type</label>
+      <select id="diet">
+        <option value="mixed">Mixed</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="vegan">Vegan</option>
+      </select>
+
+      <label>Recycling Habits</label>
+      <select id="recycling">
+        <option value="low">Low</option>
+        <option value="moderate">Moderate</option>
+        <option value="high">High</option>
+      </select>
+
+      <button type="button" onclick="calculateFootprint()" class="btn">Calculate</button>
+    </form>
+
+    <div id="result" class="result-box"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Eco-Hub | Building a Greener Future</p>
+  </footer>
+
+  <script>
+    function calculateFootprint() {
+      let electricity = +document.getElementById('electricity').value || 0;
+      let gas = +document.getElementById('gas').value || 0;
+      let carMileage = +document.getElementById('carMileage').value || 0;
+      let flights = +document.getElementById('flights').value || 0;
+
+      let total = electricity*0.92 + gas*5.3 + carMileage*0.79 + flights*90;
+
+      document.getElementById('result').innerHTML = 
+        `<h2>Your Estimated Carbon Footprint:</h2>
+         <p><strong>${total.toFixed(2)} kg CO₂ / month</strong></p>
+         <p>💡 Tip: Reduce usage, recycle more, and switch to renewable energy!</p>`;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Hub | Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+    <div class="auth-container">
+        <h2><span>Login</span> to Eco-Hub</h2>
+        <form class="auth-form" id="loginForm">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" class="btn-auth">Login</button>
+        </form>
+
+        <p class="auth-footer">Don’t have an account?
+            <a href="signup.html">Sign Up</a>
+        </p>
+
+    </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch("http://localhost:5000/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.text();
+                alert(data);
+
+                if (response.ok) {
+                    // ✅ Mark user as logged in
+                    localStorage.setItem("loggedIn", "true");
+
+                    // Redirect to dashboard
+                    window.location.href = "dashboard.html";
+                }
+            } catch (error) {
+                alert("❌ Error connecting to server!");
+                console.error(error);
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

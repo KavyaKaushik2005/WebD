@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Hub | Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1>Welcome to Eco-Hub Dashboard 🌿</h1>
+    <p>From here, you can access the whole website:</p>
+
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script>
+    // Logout button
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    });
+
+    // Optional: Check if user is logged in
+    if (!localStorage.getItem("loggedIn")) {
+      window.location.href = "login.html"; // redirect to login if not logged in
+    }
+  </script>
+</body>
+</html>
