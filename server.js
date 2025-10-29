@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+const fs = require("fs");
 
 const app = express();
 app.use(express.json());
@@ -58,13 +59,45 @@ app.post("/login", async (req, res) => {
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) return res.status(400).send("Invalid password!");
 
-    res.send("Login successful!");
+    // send minimal user info to frontend
+    res.json({
+      message: "Login successful!",
+      user: { email: user.email, firstName: user.firstName, lastName: user.lastName }
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Error logging in!");
   }
 });
 
+//
+// ✅ JOIN CHALLENGE ROUTE (writes to challenges.json)
+//
+app.post("/joinChallenge", (req, res) => {
+  const newEntry = req.body;
+  fs.readFile("challenges.json", "utf8", (err, data) => {
+    if (err) return res.status(500).send("Error reading file.");
+
+    const challenges = data ? JSON.parse(data) : [];
+    challenges.push(newEntry);
+
+    fs.writeFile("challenges.json", JSON.stringify(challenges, null, 2), err2 => {
+      if (err2) return res.status(500).send("Error saving challenge.");
+      res.send("Challenge joined successfully!");
+    });
+  });
+});
+// ✅ Get challenges for a specific user
+app.get("/getChallenges", (req, res) => {
+  const email = req.query.email;
+  fs.readFile("challenges.json", "utf8", (err, data) => {
+    if (err) return res.status(500).send("Error reading file.");
+
+    const challenges = data ? JSON.parse(data) : [];
+    const userChallenges = challenges.filter(c => c.email === email);
+    res.json(userChallenges);
+  });
+});
 //
 // ✅ Start server
 //
