@@ -378,46 +378,6 @@ body {
   box-shadow: 0 4px 10px rgba(27, 67, 50, 0.3);
 }
 
-/* ---------------- SEARCH BAR STYLING ---------------- */
-.search-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 25px auto;
-  width: 100%;
-  max-width: 500px;
-  background: #e8f5e9;
-  padding: 10px 16px;
-  border-radius: 30px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.search-bar:hover {
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
-}
-
-.search-bar input {
-  flex: 1;
-  padding: 10px 15px;
-  font-size: 1rem;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: #2e7d32;
-  font-weight: 500;
-}
-
-.search-bar input::placeholder {
-  color: #66bb6a;
-  font-style: italic;
-  opacity: 0.9;
-}
-
-.search-bar:focus-within {
-  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.25);
-}
-
 /* ======================= CART SIDEBAR ======================= */
 .cart-sidebar {
   position: fixed;
