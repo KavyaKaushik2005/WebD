@@ -46,23 +46,6 @@ class ShopManager {
     this.setupSearch(products);  // Enable search after loading
     this.updateViewCartLink();
   }
-
-  /* ---------------- SEARCH BAR FUNCTIONALITY ---------------- */
-  setupSearch(products) {
-    const searchInput = document.getElementById("searchInput");
-    if (!searchInput) return;
-
-    searchInput.addEventListener("input", () => {
-      const query = searchInput.value.toLowerCase();
-      const filtered = products.filter(p =>
-        p.title.toLowerCase().includes(query) ||
-        p.desc.toLowerCase().includes(query) ||
-        p.impact.toLowerCase().includes(query)
-      );
-      this.renderProducts(filtered);
-    });
-  }
-
   /* ---------------- RENDER PRODUCTS TO PAGE ---------------- */
   renderProducts(productList) {
     this.container.innerHTML = "";
@@ -214,3 +197,4 @@ class ShopManager {
 
 /* ---------------- INITIALIZE SHOP MANAGER ---------------- */
 const shopManager = new ShopManager();
+
