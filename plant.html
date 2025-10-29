@@ -2,151 +2,179 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Plant a Tree Challenge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant a Tree Challenge | Eco-Hub</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      font-family: Arial;
-      background-color: #f3f8f3;
-      text-align: center;
+      font-family: "Poppins", sans-serif;
+      background: #f4f9f4;
+      color: #333;
       margin: 0;
-      overflow-x: hidden;
+      padding: 0;
     }
 
-    h1 { margin-top: 60px; }
-    button {
-      background: #2e8b57;
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2d6a4f;
       color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
+      padding: 10px 30px;
     }
-    button:hover { background: #256b45; }
 
-    /* Slide-in panel */
-    #sidePanel {
-      position: fixed;
-      top: 0;
-      right: -320px;
-      width: 300px;
-      height: 100%;
-      background-color: #ffffff;
-      box-shadow: -2px 0 10px rgba(0,0,0,0.2);
-      transition: right 0.3s ease;
+    header .logo {
+      font-weight: bold;
+      font-size: 1.4em;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2d6a4f;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .day {
+      background: #d8f3dc;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .day.checked {
+      background: #52b788;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .stats {
+      text-align: center;
+      margin-top: 30px;
+      background: #e9f5e9;
       padding: 20px;
-      text-align: left;
+      border-radius: 10px;
     }
 
-    #sidePanel.open { right: 0; }
+    .stats h2 {
+      color: #2d6a4f;
+    }
 
-    #togglePanel {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #2e8b57;
-      color: white;
+    .btn-reset {
+      display: block;
+      margin: 20px auto;
+      background: #b7e4c7;
+      color: #1b4332;
       border: none;
-      padding: 8px 15px;
-      border-radius: 6px;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-weight: 600;
       cursor: pointer;
+      transition: 0.2s ease;
     }
 
-    input[type="number"] {
-      width: 60px;
-      padding: 5px;
-      margin-left: 10px;
-    }
-
-    .challenge-item {
-      background: #e9f7ec;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 10px;
+    .btn-reset:hover {
+      background: #95d5b2;
     }
   </style>
 </head>
 <body>
 
-  <button id="togglePanel">☰ My Profile</button>
+  <header>
+    <div class="logo">🌿 Eco-Hub</div>
+    <nav>
+      <a href="index.html" style="color:white; text-decoration:none;">Home</a>
+    </nav>
+  </header>
 
-  <div id="sidePanel">
-    <h3 id="userName">User Info</h3>
-    <p id="userEmail"></p>
-    <h4>Joined Challenges:</h4>
-    <div id="challengeList">Loading...</div>
+  <div class="container">
+    <h1>🌱 30-Day Tree Planting Challenge</h1>
+    <p style="text-align:center;">Each day you plant (or help plant) a tree, mark it below!</p>
+
+    <div class="calendar" id="calendar"></div>
+
+    <div class="stats" id="stats">
+      <h2>Challenge Progress</h2>
+      <p>Trees Planted: <strong id="treesCount">0</strong> / 30</p>
+      <p>CO₂ Absorbed: <strong id="co2Saved">0</strong> kg (approx.)</p>
+    </div>
+
+    <button class="btn-reset" id="resetBtn">Reset Progress</button>
   </div>
 
-  <h1>🌱 Plant a Tree Challenge</h1>
-  <p>Contribute to reducing CO₂ emissions and restoring ecosystems.</p>
-  <button id="joinBtn">Join Challenge</button>
+  <footer class="footer">
+    <p>© 2025 Eco-Hub | Together for a Sustainable World</p>
+  </footer>
 
   <script>
-    const panel = document.getElementById("sidePanel");
-    const toggleBtn = document.getElementById("togglePanel");
-    const user = JSON.parse(localStorage.getItem("user"));
+    const calendar = document.getElementById("calendar");
+    const treesCount = document.getElementById("treesCount");
+    const co2Saved = document.getElementById("co2Saved");
+    const resetBtn = document.getElementById("resetBtn");
 
-    // Toggle the side panel
-    toggleBtn.addEventListener("click", () => {
-      panel.classList.toggle("open");
-    });
+    // Load from localStorage
+    let checkedDays = JSON.parse(localStorage.getItem("plantChallenge")) || [];
 
-    // Populate user info
-    if (user) {
-      document.getElementById("userName").innerText = `${user.firstName} ${user.lastName}`;
-      document.getElementById("userEmail").innerText = user.email;
-      fetchChallenges();
-    } else {
-      document.getElementById("challengeList").innerText = "Please log in!";
+    // Generate 30 days
+    for (let i = 1; i <= 30; i++) {
+      const day = document.createElement("div");
+      day.classList.add("day");
+      day.textContent = "Day " + i;
+
+      if (checkedDays.includes(i)) {
+        day.classList.add("checked");
+      }
+
+      day.addEventListener("click", () => toggleDay(i, day));
+      calendar.appendChild(day);
     }
 
-    // Fetch user challenges
-    async function fetchChallenges() {
-      const res = await fetch(`http://localhost:5000/getChallenges?email=${user.email}`);
-      const challenges = await res.json();
-      const container = document.getElementById("challengeList");
-      container.innerHTML = "";
+    updateStats();
 
-      if (challenges.length === 0) {
-        container.innerHTML = "<p>No challenges joined yet.</p>";
+    function toggleDay(dayNum, element) {
+      if (checkedDays.includes(dayNum)) {
+        checkedDays = checkedDays.filter(d => d !== dayNum);
+        element.classList.remove("checked");
       } else {
-        challenges.forEach(c => {
-          const div = document.createElement("div");
-          div.className = "challenge-item";
-          div.innerHTML = `
-            <b>${c.challenge}</b><br>
-            <small>${new Date(c.date).toLocaleString()}</small><br>
-            Progress: <input type="number" min="0" max="100" placeholder="%" />
-          `;
-          container.appendChild(div);
-        });
+        checkedDays.push(dayNum);
+        element.classList.add("checked");
       }
+      localStorage.setItem("plantChallenge", JSON.stringify(checkedDays));
+      updateStats();
     }
 
-    // Join challenge button
-    document.getElementById("joinBtn").addEventListener("click", async () => {
-      if (!user) {
-        alert("Please log in first!");
-        window.location.href = "login.html";
-        return;
+    function updateStats() {
+      const planted = checkedDays.length;
+      treesCount.textContent = planted;
+      co2Saved.textContent = (planted * 21).toFixed(1); // average 21 kg CO₂ per tree/year
+    }
+
+    resetBtn.addEventListener("click", () => {
+      if (confirm("Reset your challenge progress?")) {
+        checkedDays = [];
+        localStorage.removeItem("plantChallenge");
+        document.querySelectorAll(".day").forEach(d => d.classList.remove("checked"));
+        updateStats();
       }
-
-      const data = {
-        email: user.email,
-        challenge: "Plant a Tree",
-        date: new Date().toISOString()
-      };
-
-      const res = await fetch("http://localhost:5000/joinChallenge", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-
-      const msg = await res.text();
-      alert(msg);
-      fetchChallenges(); // Refresh panel
     });
   </script>
+
 </body>
 </html>
