@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "Bamboo Toothbrush",
+    "desc": "100% biodegradable and sustainable.",
+    "impact": "Biodegradable handle",
+    "price": 199,
+    "img": "https://5.imimg.com/data5/SELLER/Default/2021/11/RP/GI/TL/140258896/natural-bamboo-tooth-brush.png"
+  },
+  {
+    "id": 2,
+    "title": "Reusable Water Bottle",
+    "desc": "Keeps  drinks  hot or  cold  for hours.",
+    "impact": "Saves 365 plastic bottles/year",
+    "price": 699,
+    "img": "https://i.ebayimg.com/images/g/X1QAAOSw-11mR08i/s-l1200.png"
+  },
+  {
+    "id": 3,
+    "title": "Beeswax Food Wraps",
+    "desc": "Reusable, biodegradable wraps for eco-friendly food storage.",
+    "impact": "Replaces 500+ plastic wraps",
+    "price": 469,
+    "img": "https://image.made-in-china.com/2f0j00VLYbsFhdwKqB/Beeswax-Food-Wraps-Reusable-Food-Storage-Bags-Beeswax-Covers-Vegetable-Fruit-Bags.webp"
+  },
+  {
+    "id": 4,
+    "title": "Organic Cotton T-Shirt",
+    "desc": "Soft, sustainable T-shirt for eco-conscious style.",
+    "impact": "Made with 100% organic cotton",
+    "price": 499,
+    "img": "https://5.imimg.com/data5/SELLER/Default/2023/9/340402385/OK/FI/UJ/105133959/organic-cotton-t-shirt.jpg"
+  }
+]
