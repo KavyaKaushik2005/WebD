@@ -1,85 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco Shop | Eco-Hub</title>
+  <title>Eco-Hub | Live Green, Live Better</title>
   <link rel="stylesheet" href="style1.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
+
   <header class="header">
     <div class="logo">Eco-Hub</div>
     <nav class="nav">
       <a href="index2.html">Home</a>
       <a href="calculator1.html">Calculator</a>
-      <a href="shop1.html" class="active">Shop</a>
+      <a href="shop1.html">Shop</a>
       <a href="challenges2.html">Challenges</a>
-      <a href="about.html">About</a>
+      <a href="login1.html" class="btn-auth">Login / Sign In</a>
     </nav>
   </header>
 
-  <section class="section categories">
-    <h1>Shop by Category</h1>
-    <p>Explore sustainable products to live greener.</p>
-    <div class="category-grid">
-      <div class="category-card"><span class="category-icon">♻</span>
+  <section class="hero">
+    <h1>Welcome to <span>Eco-Hub</span></h1>
+    <p class="tagline">"Live Green, Live Better"</p>
+    <div class="hero-content">
+      <p>
+        Take small steps towards a sustainable future.
+        Track your carbon footprint, join eco-friendly challenges,
+        and explore our shop of planet-friendly essentials.
+        Together, let’s build a greener tomorrow!
+      </p>
+    </div>
+    <a href="calculator1.html" class="btn">Calculate My Footprint</a>
+  </section>
+
+  <!-- FEATURES – Images now inside box -->
+  <section class="features">
+    <h2>Why Choose Eco-Hub?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-img-box">
+          <img src="leaves.jpg" alt="Carbon">
+        </div>
+        <h3>Carbon Calculator</h3>
+        <p>Understand your environmental impact with our easy-to-use calculator.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-box">
+          <img src="target.jpg" alt="Challenges">
+        </div>
+        <h3>Eco Challenges</h3>
+        <p>Take part in daily and monthly challenges to adopt sustainable habits.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img-box">
+          <img src="shopping-bag.jpg" alt="Shop">
+        </div>
+        <h3>Eco Shop</h3>
+        <p>Discover reusable, organic, and eco-conscious products.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP PREVIEW – Images inside box -->
+  <section class="shop-preview">
+    <h2>Essentials With Meaning</h2>
+    <div class="shop-grid">
+      <div class="shop-item">
+        <div class="shop-img-box">
+          <img src="https://clicinnovation.fi/wp-content/uploads/2025/01/Eco-friendly-items-and-packaging-around-green-recycling-sign-scaled.jpg" alt="Reusable Products">
+        </div>
         <p>Reusable Products</p>
       </div>
-      <div class="category-card"><span class="category-icon">🏡</span>
-        <p>Sustainable Home Items</p>
+      <div class="shop-item">
+        <div class="shop-img-box">
+          <img src="https://www.syte.ai/wp-content/uploads/2022/12/cover-10.jpg" alt="Sustainable Home Decor">
+        </div>
+        <p>Sustainable Home Decor Items</p>
       </div>
-      <div class="category-card"><span class="category-icon">🧴</span>
+      <div class="shop-item">
+        <div class="shop-img-box">
+          <img src="https://media.istockphoto.com/id/1206731208/photo/zero-waste-self-care-products.jpg?s=612x612&w=0&k=20&c=1Dpse_cqMVo7VuQ4FNFQypWUXY3bsZbG_tjG0oDovTg=" alt="Personal Care">
+        </div>
         <p>Personal Care & Wellness</p>
       </div>
-      <div class="category-card"><span class="category-icon">👕</span>
+      <div class="shop-item">
+        <div class="shop-img-box">
+          <img src="https://thumbs.dreamstime.com/b/flat-lay-eco-friendly-fashion-accessories-made-organic-materials-like-bamboo-cork-arranged-natural-wooden-337289064.jpg" alt="Eco Fashion">
+        </div>
         <p>Eco Fashion</p>
       </div>
     </div>
+    <a href="shop1.html" class="btn">Explore Shop</a>
   </section>
-
-  <section class="section shop">
-    <h1>Eco-Friendly Products</h1>
-    <p>Discover reusable, sustainable items for a greener lifestyle.</p>
-
-    <!-- 🔍 Search Bar -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search products..." />
-    </div>
-
-    <div id="productContainer" class="shop-grid"></div>
-  </section>
-
-
-  <!-- CART SIDEBAR -->
-  <div id="cartSidebar" class="cart-sidebar">
-    <div class="cart-header">
-      <h2>Your Cart</h2>
-      <button id="closeCart" class="close-btn">×</button>
-    </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div id="cartTotal" class="cart-total">Total: ₹0</div>
-  </div>
-
-  <!-- VIEW CART BUTTON -->
-  <button id="openCart" class="view-cart-btn">
-    🛒View Cart (<span id="cartCount">0</span>)
-  </button>
 
   <footer class="footer">
     <div class="footer-about">
       <h3>Eco-Hub</h3>
-      <p>Eco-Hub is your sustainability partner.</p>
+      <p>Eco-Hub is your sustainability partner—helping people track their footprint,
+        adopt eco-friendly challenges, and access meaningful products.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="calculator1.html">Carbon Calculator</a></li>
+        <li><a href="challenges2.html">Eco Challenges</a></li>
+        <li><a href="shop1.html">Eco Shop</a></li>
+      </ul>
     </div>
     <p class="copyright">© 2025 Eco-Hub | All Rights Reserved</p>
   </footer>
 
-  <script src="js/ProductCard.js"></script>
-  <script src="js/ShopManager.js"></script>
 </body>
-
 </html>
