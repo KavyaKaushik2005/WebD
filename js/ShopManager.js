@@ -163,12 +163,16 @@ class ShopManager {
     // Add bottom action buttons if cart has items
     const actionDiv = document.createElement("div");
     actionDiv.className = "cart-actions";
-
     const proceedBtn = document.createElement("button");
     proceedBtn.className = "proceed-btn";
     proceedBtn.textContent = "Proceed to Pay";
-    proceedBtn.onclick = () => alert("Proceeding to payment...");
+    // open the processing simulation page
+    proceedBtn.onclick = () => {
+      // open processing page which will redirect to success
+      window.location.href = "payment-processing.html";
+    };
     actionDiv.appendChild(proceedBtn);
+
 
     const clearAllBtn = document.createElement("button");
     clearAllBtn.className = "clear-all-btn";
