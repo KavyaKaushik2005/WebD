@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Payment Successful — Eco-Hub</title>
+  <style>
+    :root{
+      --green:#2e7d32;
+      --dark:#1b4332;
+      --muted:#667;
+      --card:#fff;
+      --bg:#f3fbf6;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins", Arial, sans-serif;
+      background:linear-gradient(180deg,var(--bg),#eef9ee);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:#123;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:980px;
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:28px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:26px;
+      box-shadow:0 12px 30px rgba(10,30,10,0.06);
+      text-align:left;
+    }
+
+    .success-head{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    .tick{
+      width:84px;height:84px;border-radius:50%;
+      background:linear-gradient(180deg,var(--green),#2aa14a);
+      display:grid;place-items:center;
+      box-shadow:0 8px 20px rgba(46,125,50,0.18);
+      color:white;font-size:40px;font-weight:800;
+      transform:scale(0.9);
+      animation:pop 600ms cubic-bezier(.2,.9,.28,1) forwards;
+    }
+    @keyframes pop{to{transform:scale(1)}}
+
+    .success-title{font-size:1.5rem;font-weight:700;color:var(--dark)}
+    .success-sub{color:var(--muted);margin-top:6px;font-size:0.95rem}
+
+    /* order summary */
+    .order-meta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .pill{background:#f3fff5;color:var(--green);padding:8px 12px;border-radius:999px;font-weight:600;font-size:0.95rem}
+
+    .items-list{margin-top:18px;border-radius:10px;padding:12px;background:#fbfffb}
+    .item{display:flex;gap:12px;align-items:center;padding:10px;border-bottom:1px solid rgba(0,0,0,0.03)}
+    .item:last-child{border-bottom:none}
+    .item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+    .item .title{font-weight:600;color:var(--dark)}
+    .item small{display:block;color:var(--muted);font-size:0.9rem}
+
+    .summary-box{padding:14px;border-radius:10px;background:#fff;box-shadow:0 6px 18px rgba(5,20,5,0.02); margin-top:14px}
+    .summary-row{display:flex;justify-content:space-between;padding:8px 0;color:#333}
+    .summary-row.total{font-weight:700;font-size:1.1rem;color:var(--green)}
+
+    .actions{display:flex;gap:12px;margin-top:18px}
+    .btn{
+      display:inline-block;padding:10px 16px;border-radius:999px;border:none;font-weight:700;cursor:pointer;
+    }
+    .btn.primary{background:var(--green);color:#fff}
+    .btn.ghost{background:#fff;border:1px solid #e8f3ea;color:var(--dark)}
+
+    /* right column */
+    .right-col{display:flex;flex-direction:column;gap:18px}
+    .order-card{padding:18px;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(5,20,5,0.02)}
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    @media (max-width:920px){
+      .wrap{grid-template-columns:1fr; padding-bottom:40px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-live="polite">
+      <div class="success-head">
+        <div class="tick" aria-hidden="true">✓</div>
+        <div>
+          <div class="success-title" id="mainTitle">Payment Successful</div>
+          <div class="success-sub">Thank you — your order is confirmed. A receipt has been generated for your records (simulation).</div>
+          <div class="order-meta" style="margin-top:10px">
+            <div class="pill" id="orderId">Order # —</div>
+            <div class="pill" id="orderDate">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="items-list" id="itemsList" aria-live="polite" style="margin-top:18px">
+        <!-- items inserted by JS -->
+      </div>
+
+      <div class="summary-box" id="summaryBox">
+        <div class="summary-row"><span>Subtotal</span><span id="subTotal">₹0</span></div>
+        <div class="summary-row"><span>Shipping (demo)</span><span>₹0</span></div>
+        <div class="summary-row total"><span>Total Paid</span><span id="grandTotal">₹0</span></div>
+
+        <div class="actions">
+          <button class="btn primary" id="continueBtn">Continue Shopping</button>
+          <button class="btn ghost" id="downloadBtn">Download Receipt</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <div class="order-card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:700">Payment Method</div>
+            <div class="muted">Demo - UPI QR / Simulated</div>
+          </div>
+          <div style="font-weight:700;color:var(--green)">Success</div>
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid #f0f0f0">
+
+        <div style="font-weight:700;margin-bottom:8px">Order Summary</div>
+        <div class="muted" id="itemsCount">0 items</div>
+      </div>
+
+      <div class="order-card">
+        <div style="font-weight:700">Need Help?</div>
+        <div class="muted" style="margin-top:8px">Contact: support@ecohub.example (demo)</div>
+        <div style="margin-top:10px"><small class="muted">This is a simulated receipt page for demonstration only.</small></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Read cart from localStorage (your ShopManager stores as 'cart')
+    const cartJSON = localStorage.getItem('cart') || '[]';
+    const cart = JSON.parse(cartJSON);
+
+    // If no items, show message and change title
+    const itemsList = document.getElementById('itemsList');
+    const mainTitle = document.getElementById('mainTitle');
+    const orderIdEl = document.getElementById('orderId');
+    const orderDateEl = document.getElementById('orderDate');
+    const itemsCountEl = document.getElementById('itemsCount');
+    const subTotalEl = document.getElementById('subTotal');
+    const grandTotalEl = document.getElementById('grandTotal');
+
+    function formatINR(n){ return "₹" + n.toFixed(0); }
+
+    // Helper: generate order id
+    const orderId = 'EH' + Math.floor(100000 + Math.random()*900000);
+    const now = new Date();
+    orderIdEl.textContent = orderId;
+    orderDateEl.textContent = now.toLocaleString();
+
+    if (!cart || cart.length === 0) {
+      mainTitle.textContent = "No items in cart";
+      itemsList.innerHTML = "<div style='padding:20px;color:#666;text-align:center'>There are no items to display.</div>";
+      subTotalEl.textContent = "₹0";
+      grandTotalEl.textContent = "₹0";
+      itemsCountEl.textContent = "0 items";
+    } else {
+      let total = 0;
+      let count = 0;
+      cart.forEach(i => {
+        const qty = i.qty || 1;
+        const price = (i.product.price || i.price || 0) * qty;
+        total += price;
+        count += qty;
+
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <img src="${i.product.img}" alt="${(i.product.title || 'product')}" />
+          <div style="flex:1">
+            <div class="title">${i.product.title}</div>
+            <small>${i.product.impact || ''} • Qty: ${qty}</small>
+          </div>
+          <div style="font-weight:700;color:var(--green)">${formatINR(price)}</div>
+        `;
+        itemsList.appendChild(div);
+      });
+
+      subTotalEl.textContent = formatINR(total);
+      grandTotalEl.textContent = formatINR(total); // shipping = 0 (demo)
+      itemsCountEl.textContent = `${count} item${count>1?'s':''}`;
+    }
+
+    // Download receipt (basic text file)
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const receipt = {
+        orderId,
+        date: now.toISOString(),
+        items: cart,
+        total: grandTotalEl.textContent
+      };
+      const blob = new Blob([JSON.stringify(receipt, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${orderId}_receipt.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Continue shopping: clear cart and go back
+    document.getElementById('continueBtn').addEventListener('click', () => {
+      // clear cart so cart UI resets
+      localStorage.removeItem('cart');
+      // redirect to shop page
+      window.location.href = 'shop1.html'; // adjust if your shop page is shop.html
+    });
+
+    // Clear cart on load (we assume payment successful)
+    // But wait 300ms so user sees summary first
+    setTimeout(() => {
+      // optional: keep cart until user clicks continue; if you prefer to clear immediately uncomment
+      // localStorage.removeItem('cart');
+      // update cartCount in header if present
+      try{
+        const span = document.getElementById('cartCount');
+        if(span) span.textContent = '0';
+      }catch(e){}
+    }, 400);
+  </script>
+</body>
+</html>
