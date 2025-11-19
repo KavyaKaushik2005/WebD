@@ -7,7 +7,7 @@ class ProductCard {
   render() {
     const card = document.createElement("div");
     card.className = "product-card";
-    card.dataset.category = "all"; 
+    card.dataset.category = "all";
 
     card.innerHTML = `
       <img src="${this.product.img}" alt="${this.product.title}">
@@ -80,3 +80,4 @@ class ProductCard {
 //     return card;
 //   }
 // }
+
